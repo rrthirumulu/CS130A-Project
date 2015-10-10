@@ -2,7 +2,7 @@ template <class T>
 class Node
 {
 public:
-  Node(T data) // Constructor
+  Node(T data); // Constructor
   ~Node(); // Destructor
   T getData(); // Returns Data
   Node * next;
