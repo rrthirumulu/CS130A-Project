@@ -1,18 +1,18 @@
 template <class T>
 T Node<T>::getData()
 {
-	    return data;
+	    return * data;
 }
 
 template <class T>
 Node<T>::~Node()
 {
-	data = 0;
+	delete data;
 }
 
 template <class T>
 Node<T>::Node(T d)
 {
-	    data = d;
+	    data = new T(d);
 }
 

@@ -1,3 +1,10 @@
+#ifndef _LINKEDLIST_H_
+#define _LINKEDLIST_H_
+
+#ifndef _NODE_H_
+  #include "node.h"
+#endif
+
 template <class T>
 class LinkedList
 {
@@ -14,3 +21,4 @@ private:
 };
 
 #include "linkedlist.tpp"
+#endif

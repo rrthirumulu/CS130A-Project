@@ -1,14 +1,18 @@
+#ifndef _NODE_H_
+#define _NODE_H_
+
 template <class T>
 class Node
 {
 public:
-  Node(T data); // Constructor
+  Node(T d); // Constructor
   ~Node(); // Destructor
   T getData(); // Returns Data
-  Node * next;
-  Node * prev;
+  Node<T> * next;
+  Node<T> * prev;
 private:
-  T data;
+  T * data;
 };
 
 #include "node.tpp"
+#endif

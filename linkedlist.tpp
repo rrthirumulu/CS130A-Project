@@ -1,5 +1,6 @@
+
 #include <cstddef>
-//#include <iostream>
+#include <iostream>
 //using namespace std; 
 
 template <class T>
@@ -31,6 +32,7 @@ void LinkedList<T>::addNode(T data)
   {
     head = x;
     tail = x;
+	x->prev = NULL;
   }
   else
   {
@@ -38,6 +40,7 @@ void LinkedList<T>::addNode(T data)
     x->prev = tail;
     tail = x;
   }
+  x->next = NULL;
 }
 
 template <class T>

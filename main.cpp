@@ -1,25 +1,63 @@
 #include "node.h"
 #include "linkedlist.h"
+#include "wallpost.h"
+#include "wall.h"
+#include "user.h"
+#include "usernetwork.h"
 #include <iostream>
 using namespace std;
 
 int main()
 {
-//  Node<int> * t = new Node<int>(4); 
-//  cout << t->getData() << endl;
+  UserNetwork * usenet = new UserNetwork();
+  usenet->read();
+  string input = "xxx";
+ 
+  while (input != "\n")
+  {
+	cout << "1. create user\n2. login" << endl;
+    getline(cin, input);
+    if(input[0] == '1')
+    {
+	  cout << "username: " << endl;
+	  getline(cin, input);
+	  cout << "password: " << endl;
+	  string pass;
+	  getline(cin, pass);
+      usenet->addUser(input, pass);    
+	
+	}
 
-  LinkedList<int> * x = new LinkedList<int>();
+    if(input[0] == '2')
+    {
+      cout << "username: " << endl;
+	  string user, pass;
+	  getline(cin, user);
+	  cout << "password: " << endl;
+	  getline(cin, pass);
 
-  x->addNode(2);
-  x->addNode(3);
-  x->addNode(4);
-  cout << x->first()->getData() << endl;
-  cout << x->first()->next->getData() << endl;
+      User x =  usenet->find(user) ;
 
-  x->remove(1);
-  cout << x->first()->getData() << endl;
-  cout << x->first()->next->getData() << endl;
 
-  delete x;
-  return 0;
+      if (x.getPassword() == pass)
+	  {
+		input = "";
+        cout << "Sucessfully Logged in." << endl;
+        while(input != "quit")
+		{
+
+        if(input[0] == '1')
+		  cout << x.write() << endl;
+
+
+        cout << "1. Display Wall\nquit. logs out" << endl;
+
+        getline(cin, input);
+		}
+
+	  }
+	  else cout << "There was an error" << endl;
+    }
+  }
+
 }
