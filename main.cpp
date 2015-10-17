@@ -13,9 +13,9 @@ int main()
   usenet->read();
   string input = "xxx";
  
-  while (input != "\n")
+  while (input != "3")
   {
-	cout << "1. create user\n2. login" << endl;
+	cout << "1. create user\n2. login\n3. quit program" << endl;
     getline(cin, input);
     if(input[0] == '1')
     {
@@ -24,7 +24,7 @@ int main()
 	  cout << "password: " << endl;
 	  string pass;
 	  getline(cin, pass);
-      usenet->addUser(input, pass);    
+      if (!usenet->addUser(input, pass)) cout << "There was an error creating the user. Try a different username." << endl;    
 	
 	}
 
@@ -43,14 +43,14 @@ int main()
 	  {
 		input = "";
         cout << "Sucessfully Logged in." << endl;
-        while(input != "quit")
+        while(input != "2")
 		{
 
         if(input[0] == '1')
 		  cout << x.write() << endl;
 
 
-        cout << "1. Display Wall\nquit. logs out" << endl;
+        cout << "1. Display Wall\n2. logs out" << endl;
 
         getline(cin, input);
 		}
