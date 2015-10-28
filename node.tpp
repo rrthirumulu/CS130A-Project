@@ -1,5 +1,5 @@
 template <class T>
-T Node<T>::getData()
+T & Node<T>::getData()
 {
 	    return * data;
 }
@@ -16,3 +16,5 @@ Node<T>::Node(T d)
 	    data = new T(d);
 }
 
+template <class T>
+Node<T>::Node(const T * d) { data = new T(*d); };

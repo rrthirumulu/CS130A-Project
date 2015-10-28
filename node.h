@@ -6,12 +6,13 @@ class Node
 {
 public:
   Node(T d); // Constructor
+  Node(const T * d);
   ~Node(); // Destructor
-  T getData(); // Returns Data
+  T & getData(); // Returns Data
   Node<T> * next;
   Node<T> * prev;
 private:
-  T * data;
+ T * data;
 };
 
 #include "node.tpp"

@@ -17,7 +17,8 @@ wallpost.o:
 wall.o: wallpost.h linkedlist.h
 	g++ wall.cpp -c -std=c++11
 
-clean:
-	rm the_network
-	rm *.o
 
+
+clean:
+	rm the_network -f
+	rm *.o -f
