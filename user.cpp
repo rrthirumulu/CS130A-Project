@@ -6,6 +6,7 @@ User::User(std::string uname)
 {
   username = uname;
   the_wall = new Wall();
+  friends = new List<std::string>();
 }
 
 User::User(const User & u)
@@ -14,6 +15,7 @@ User::User(const User & u)
   password = u.password;
   the_wall = new Wall();
   the_wall->read(u.the_wall->print() );
+  friends = new List<std::string>();
 }
 
 User::User(std::string uname, std::string pword)
@@ -43,10 +45,13 @@ std::string User::getUsername() const { return username; }
 
 void User::addPost(WallPost wp) { the_wall->addPost(wp); }
 void User::addPost(std::string text) { the_wall->addPost(text); }
-
+void User::addPost(std::string p, std::string u) { the_wall->addPost(p,u); }
 void User::deletePost(int index)
 {
   the_wall->removePost(index);
+}
+WallPost & User::get_post(int index){
+  the_wall->get(index);
 }
 
 std::string User::write()
@@ -70,4 +75,22 @@ void User::readIn(std::string all)
   for(std::string temp; std::getline(iss, temp); )
     cin += temp + '\n';
   the_wall->read(cin);
+}
+
+void User::addFriend(std::string f)
+{
+  friends->insert(0, f);
+}
+
+void User::print_friends()
+{
+  for(Node<std::string> * tmp = friends->begin(); tmp!=NULL; tmp=tmp->next)
+    std::cout << "THIS IS A FRIEND" << tmp->getData() << std::endl;
+}
+
+void User::send_friend_request(std::string u)
+{
+  //std::ofstream outfile;
+  //outfile.open("friend_requests.txt", std::ios_base::app);
+  //outfile << username << "\n" << u;
 }

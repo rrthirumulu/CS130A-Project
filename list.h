@@ -13,9 +13,13 @@ public:
   void insert (int pos, const T & item);
   void remove (int pos);
   void set (int pos, const T & item);
-  T & get (int pos) ;
+  T & get (int pos);
+  int length();
+  Node<T> * begin();
+
 private:
   Node<T> * head;
+  int len;
 };
 
 

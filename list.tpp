@@ -3,6 +3,7 @@ template <class T>
 List<T>::List()
 {
   head = NULL;
+  len = 0;
 }
 
 template <class T>
@@ -22,7 +23,7 @@ void List<T>::insert(int pos, const T & item)
 {
   Node<T> * tmp = head;
   Node<T> * x = new Node<T>(&item);
-
+  len++;
   if(pos == 0 || head == NULL)
   {
     x->next = head;
@@ -34,6 +35,8 @@ void List<T>::insert(int pos, const T & item)
     if(tmp->next != NULL) tmp=tmp->next;
   x->next = tmp->next;
   tmp->next = x;
+
+  len++;
 }
 
 template <class T>
@@ -48,6 +51,7 @@ void List<T>::remove(int pos)
     to_delete = head;
     head = head->next;
     delete to_delete;
+    len--;
     return;
   }
 
@@ -58,7 +62,7 @@ void List<T>::remove(int pos)
   to_delete = tmp->next;
   tmp->next = to_delete->next;
   delete to_delete;
-
+  len--;
 }
 
 
@@ -71,11 +75,21 @@ void List<T>::set(int pos, const T & item)
 template <class T>
 T & List<T>::get(int pos) 
 {
-  T * x = new T;
   Node<T> * tmp = head;
   for( ; pos > 0; pos--)
-    if (tmp != NULL) tmp = tmp->next;
-  if (tmp == NULL) return * x;
+    if (tmp->next != NULL) tmp = tmp->next;
   return (tmp->getData());
   
+}
+
+template <class T>
+int List<T>::length()
+{
+  return len;
+}
+
+template <class T>
+Node<T> * List<T>::begin()
+{
+  return head;
 }

@@ -52,7 +52,6 @@ int main()
 
 
         cout << "1. Display Wall\n2. logs out" << endl;
-
         getline(cin, input);
 		}
 

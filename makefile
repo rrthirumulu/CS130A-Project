@@ -1,9 +1,9 @@
 # build an executable named myprog from myprog.c
 the_network: main.o wallpost.o wall.o user.o usernetwork.o
-	g++ main.o wall.o wallpost.o user.o usernetwork.o -o the_network
+	g++ main.o wall.o wallpost.o user.o usernetwork.o -o the_network -std=c++11
 
 main.o: usernetwork.h
-	g++ main.cpp -c
+	g++ main.cpp -c -std=c++11
 
 usernetwork.o: user.h linkedlist.h
 	g++ usernetwork.cpp -c

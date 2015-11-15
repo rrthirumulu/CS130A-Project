@@ -1,9 +1,9 @@
 #include <iostream>
 
-#ifndef LinkedList
+#ifndef _LIST_H_
   #include "node.h"
   #include "wallpost.h"
-  #include "linkedlist.h"
+  #include "list.h"
 #endif
 
 class Wall
@@ -12,15 +12,17 @@ public:
   Wall(); // Constructor
   ~Wall(); // Destructor
   void addPost(std::string);
+  void addPost(std::string, std::string);
   void addPost(WallPost);
   bool removePost(int);
   void setUsername(std::string);
   std::string getUsername();
   std::string print();
   void read(std::string);
-  void setW(LinkedList<WallPost> *);
+  void setW(List<WallPost> *);
+  Node<WallPost> * begin();
+  WallPost & get(int);
 private:
-  LinkedList<WallPost> * the_wall;
+  List<WallPost> * the_wall;
   std::string username;
-
 };

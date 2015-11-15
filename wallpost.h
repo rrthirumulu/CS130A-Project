@@ -11,7 +11,8 @@ class WallPost
 	    WallPost(const WallPost&);
 		WallPost(std::string);
 		WallPost(std::string p, std::string u); //constructor
-		~WallPost(); //destructor
+        WallPost(std::string p, std::string u, std::string t);
+        ~WallPost(); //destructor
 		std::string getPost();
 		void setPost( std::string p );
 		std::string getTime();

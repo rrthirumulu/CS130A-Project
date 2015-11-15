@@ -4,7 +4,7 @@
 
 Wall::Wall()
 {
-	the_wall = new LinkedList<WallPost>;
+	the_wall = new List<WallPost>;
 }
 
 Wall::~Wall()
@@ -15,12 +15,16 @@ Wall::~Wall()
 void Wall::addPost(std::string p)
 {
   WallPost wp(p);
-  the_wall->addNode(wp);
+  the_wall->insert(0, wp);
 }
-
+void Wall::addPost(std::string p, std::string u)
+{
+  WallPost wp(p, u);
+  the_wall->insert(0, wp);
+}
 void Wall::addPost(WallPost wp)
 {
-	the_wall->addNode(wp);
+	the_wall->insert(0, wp);
 }
 
 bool Wall::removePost(int i)
@@ -41,16 +45,12 @@ std::string Wall::getUsername()
 std::string Wall::print()
 {
   std::string c = "";
-  Node<WallPost> * tmp = the_wall->first();
-  
-  while(tmp != NULL)
-  {
+  for(int i=0, j=the_wall->length(); i<j; i++)
 //	std::cout << "Address: " << tmp << std::endl;
 //	std::cout << tmp->getData().getAllData() << std::endl;
-    c.append(tmp->getData().getAllData());
+    c.append(the_wall->get(i).getAllData());
 //    c.append("\n");
-	tmp=tmp->next;
-  }
+  
   return c;
 }
 
@@ -61,13 +61,22 @@ void Wall::read(std::string c)
       std::getline(iss, post), std::getline(iss, user), std::getline(iss,t);
 	  )
   {
-//	std::cout << "NEW POST: " << post << user << t << std::endl;
     WallPost * x = new WallPost(post, user);
-	the_wall->addNode(*x);
+	the_wall->insert(0, *x);
   }
 }
 
-void Wall::setW(LinkedList<WallPost> * wp)
+void Wall::setW(List<WallPost> * wp)
 {
 	the_wall = wp;
+}
+
+Node<WallPost> * Wall::begin()
+{
+  return the_wall->begin();
+}
+
+WallPost & Wall::get(int index)
+{
+  return the_wall->get(index);
 }

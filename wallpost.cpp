@@ -18,6 +18,14 @@ WallPost::WallPost(std::string p, std::string u)
 	username = u;
 	updateTime();
 }
+
+WallPost::WallPost(std::string p, std::string u, std::string t)
+{
+  post = p;
+  username = u;
+  time = t;
+}
+
 WallPost::~WallPost()
 {
 	post.clear();

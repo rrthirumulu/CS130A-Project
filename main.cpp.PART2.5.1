@@ -1,0 +1,73 @@
+#include "node.h"
+#include "linkedlist.h"
+#include "wallpost.h"
+#include "wall.h"
+#include "user.h"
+#include "usernetwork.h"
+#include "list.h"
+#include <iostream>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+  List<int> * x = new List<int>();
+  x->insert(0, 4); // 4
+  x->insert(1, 5); // 4 5
+  x->insert(1, 3); // 4 3 5
+  x->remove(1); // 4 5
+  x->set(1, 6); // 4 6
+  cout << x->get(2) << endl;
+
+  List<string> * a = new List<string>();
+  a->insert(0, "charlie");
+  cout << a->get(0) << endl;
+
+
+  // MEASURE:
+  List<int> * m = new List<int>();
+  clock_t begin = clock();
+  for(int i=1; i<2000; i++)
+    m->insert(i/2, i);
+  clock_t end = clock();
+  double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+  cout << "2000: " << elapsed_secs << endl;
+
+  List<int> * mm = new List<int>();
+  begin = clock();
+  for(int i =1; i <4000; i++)
+    mm->insert(i/2, i);
+  end = clock();
+  elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+  cout << "4000: " << elapsed_secs << endl;
+
+  List<int> * em = new List<int>();
+  begin = clock();
+  for(int i =1; i <6000; i++)
+    em->insert(i/2, i);
+  end = clock();
+  elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+  cout << "6000: " << elapsed_secs << endl;
+
+  List<int> * mmm = new List<int>();
+  begin = clock();
+  for(int i =1; i <8000; i++)
+    mmm->insert(i/2, i);
+  end = clock();
+  elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+  cout << "8000: " << elapsed_secs << endl;
+
+  List<int> * mmmm = new List<int>();
+  begin = clock();
+  for(int i =1; i <10000; i++)
+    mmmm->insert(i/2, i);
+  end = clock();
+  elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+  cout << "10000: " << elapsed_secs << endl;
+
+  delete mmmm;
+
+  ///
+  mm->begin()->next->next;
+}
+    

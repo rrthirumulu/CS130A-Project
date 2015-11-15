@@ -17,9 +17,11 @@ public:
   std::string write();
   void read(std::string);
   void read();
-  User find(std::string);
+  void read_friends(std::string);
+  void read_friends();
+  User & find(std::string);
+  Node<User> * begin();
+  User & get(int);
 private:
-  LinkedList<User> * users;
-  
-
+  List<User> * users;
 };
