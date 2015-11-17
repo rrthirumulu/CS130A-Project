@@ -7,6 +7,7 @@
 #include "list.h"
 #include <iostream>
 #include <string>
+#include <vector>
 #include <fstream>
 #include <map>
 using namespace std;
@@ -50,7 +51,10 @@ int main()
 	  {
 		input = "";
         cout << "Sucessfully Logged in." << endl;
-        
+       
+
+
+
         //Check for friend requests and handle
         string l, ll;
         bool frequest = false;
@@ -68,11 +72,15 @@ int main()
               names[i] = l;
               i++;
             }
-          } 
-          //for(int j=0; j<i; j++)
-           // cout << j << ". " << names[j] << endl;
+          }
+          cout << "i variable counter: " << i << endl;
+          for(int j=0; j<i; j++)
+            cout << j << ". " << names[j] << endl;
         }
         myfriends.close();
+        // Output variable: names (names[1], names[2])
+
+
         // Add friend to friend list
         std::ofstream add_friends;
         add_friends.open("data_friends.txt", std::ios_base::app);
@@ -89,26 +97,57 @@ int main()
           names.erase(stoi(l));
          } catch (std::invalid_argument e) {}
         }
+
+
+
+
         // Rewrite friend_requests.txt from map AND file
         ifstream my_f("friend_requests.txt");
         map<string, string> relation;
+        string write_to;
         if(my_f.is_open())
         {
           while(getline(my_f, l) && getline(my_f, ll) )
             if (ll != x.getUsername())
-              {relation[l] = ll; cout << l << "\t" << ll << endl;}
+            {
+              relation[l] = ll;
+              //cout << "ADDING TO RELATION:" << l << "\t" << ll << endl;
+              write_to += l + "\n" + ll + "\n";
+            }
         }
         my_f.close();
 
-        cout << relation.size() << endl;
+        //cout << relation.size() << endl;
         // Add everything related to username (but NOT the already added friends)
+        //cout << "BEGIN: " << endl; 
         for (std::map<int, string>::iterator it=names.begin(); it!=names.end(); ++it)
-          if(it->second.length() > 1)
+        {
+          //cout << it->second << it->second.length() << endl;
+          if((it->second).length() > 1)
+          {
             relation[it->second] = x.getUsername();
-        cout << relation.size() << endl; //// BEGIN HERE SIZE IS BAD
-        for(std::map<string, string>::iterator it = relation.begin(); it !=relation.end(); ++it)
-          cout << it->first << " => " << it->second << endl;
-        
+            //cout << "ADDING TO RELATION:" << it->second << "\t" << x.getUsername() << endl;
+            write_to += it->second + "\n" + x.getUsername() + "\n";
+          }
+        }
+        //cout << "END" << endl;
+        //cout << relation.size() << endl; //// BEGIN HERE SIZE IS BAD
+        //for(std::map<string, string>::iterator it = relation.begin(); it !=relation.end(); ++it)
+        //  cout << it->first << " => " << it->second << endl;
+        //cout << "HERE:\n" << write_to << endl; 
+
+
+        // WRITE TO FILE
+        ofstream newFile("friend_requests.txt");
+        newFile << write_to;
+        newFile.close();
+
+
+
+
+
+
+
         while(input != "2")
 		{
 
@@ -196,13 +235,81 @@ int main()
           x.send_friend_request(usenet->get(stoi(n)).getUsername());
 
         }
+        if(input[0] == 'i') // Display/delete friends
+        {
+          vector<string> my_friends;
+          // Read all friends into array
+          ifstream myfriends ("data_friends.txt");
+          if(myfriends.is_open())
+          {
+            while(getline(myfriends, l) && getline(myfriends, ll) )
+            {
+              if (l  == x.getUsername())
+                my_friends.push_back( ll );
+              if (ll == x.getUsername())
+                my_friends.push_back( l  );
+            }
+          }
+          myfriends.close();
+
+          while(input[0] != 'c')
+          {
+            if (my_friends.size() == 0)
+            {
+              cout << "You have no friends :)" << endl;
+              break;
+            }
+
+
+            cout << "Enter the number of the friend to delete, or press c to continue" << endl;
+            // Display friends
+            vector<string>::const_iterator i;
+            int j =0 ;
+            for(i = my_friends.begin(); i != my_friends.end(); ++i, j++)
+            {
+             cout << j << ".\t" << *i << endl; 
+            }
+          
+
+            // Delete Friend from file
+       
+
+            getline(cin, input);
+            if (input[0] != 'c')
+            {
+              string my_deleted = my_friends[stoi(input)]; 
+              string outf;
+              ifstream myfriends2 ("data_friends.txt");
+              if(myfriends2.is_open())
+              {
+                while(getline(myfriends2, l) && getline(myfriends2, ll))
+                {
+                  if( !( (l == my_deleted && ll == x.getUsername() ) || (l == x.getUsername() && ll == my_deleted) ) )
+                    outf += l + "\n" + ll + "\n";
+                }
+              }
+
+              ofstream my_d("data_friends.txt");
+              my_d << outf;
+              my_d.close();
+
+              // Remove from list
+              my_friends.erase(my_friends.begin() + stoi(input));
+            }
+
+          }
+        }
+
+
+
         if(input[0] == '1') // Display Wall
 		  cout << x.write() << endl;
 
 
-        cout << "1. Display Wall" << endl;
+        cout << "1. Display Wall\n2. Log out" << endl;
         cout << "a. Create wallpost\nb. Delete wallpost\nc. Change your password\n" 
-             << "d. Logout\ne. Delete account\nf. Search for friends to add."<< endl;
+             << "d. Logout\ne. Delete account\nf. Search for friends to add.\n"
+             << "i. Display/delete friends" << endl;
         getline(cin, input);
 		}
 

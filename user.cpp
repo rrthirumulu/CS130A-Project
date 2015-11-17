@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include "user.h"
 
@@ -90,7 +91,7 @@ void User::print_friends()
 
 void User::send_friend_request(std::string u)
 {
-  //std::ofstream outfile;
-  //outfile.open("friend_requests.txt", std::ios_base::app);
-  //outfile << username << "\n" << u;
+  std::ofstream outfile;
+  outfile.open("friend_requests.txt", std::ios_base::app);
+  outfile << username << "\n" << u << "\n";
 }
