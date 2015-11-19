@@ -20,6 +20,7 @@ public:
   void read_friends(std::string);
   void read_friends();
   User & find(std::string);
+  bool exists(std::string);
   Node<User> * begin();
   User & get(int);
 private:

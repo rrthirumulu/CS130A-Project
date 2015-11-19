@@ -1,5 +1,12 @@
-To create the program:
-make
+Charlie Getzen
+Raghav T
+
+To create the program please run:
+make clean && make
+
 To run the program
 ./the_network
+
 Follow on-screen prompt.
+
+Please do not delete any *.txt.bak files -- they are copied when running `make clean`

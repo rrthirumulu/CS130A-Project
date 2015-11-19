@@ -95,3 +95,13 @@ void User::send_friend_request(std::string u)
   outfile.open("friend_requests.txt", std::ios_base::app);
   outfile << username << "\n" << u << "\n";
 }
+
+Wall * User::getWall()
+{
+  return the_wall;
+}
+List<std::string> * User::getFriends()
+{
+  return friends;
+}
+

@@ -22,3 +22,6 @@ wall.o: wallpost.h linkedlist.h
 clean:
 	rm the_network -f
 	rm *.o -f
+	cp data.txt.bak data.txt
+	cp data_friends.txt.bak data_friends.txt
+	cp data_comments.txt.bak data_comments.txt

@@ -1,0 +1,9 @@
+Zed
+0
+charlie
+This is my comment foo..
+Zed
+0
+charlie
+COMMENT
+

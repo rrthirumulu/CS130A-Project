@@ -141,9 +141,17 @@ User & UserNetwork::find(std::string uname)
   for( ; tmp != NULL; tmp=tmp->next)
     if (tmp->getData().getUsername() == uname )
       return tmp->getData() ;
-  //User x("NO");
-  //return x;
 }
+
+bool UserNetwork::exists(std::string uname)
+{
+  Node<User> *tmp = users->begin();
+  for( ; tmp != NULL; tmp=tmp->next) 
+    if (tmp->getData().getUsername() == uname )
+      return true;
+  return false;
+}
+
 
 Node<User> * UserNetwork::begin()
 {

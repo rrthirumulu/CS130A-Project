@@ -26,6 +26,8 @@ public:
   void send_friend_request(std::string);
 
   WallPost & get_post(int);
+  Wall * getWall();
+  List<std::string> * getFriends();
 private:
   Wall * the_wall;
   std::string username;
